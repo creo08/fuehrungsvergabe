@@ -2,6 +2,11 @@
 
 Versionen nach [Semantic Versioning](https://semver.org/lang/de/). Solange die Hauptversion 0 ist, kann sich noch alles ändern, auch das Format der Links und der Sicherungsdateien.
 
+## Unveröffentlicht
+
+- **Anleitung in der App:** In der Koordinationsansicht öffnet **Anleitung** (oben rechts, immer sichtbar) die Kurzanleitung als Dialog, auch offline. Die Anleitung liegt dafür jetzt unter `app/ANLEITUNG.md`.
+- **Feedback:** **Mehr → Feedback geben** öffnet ein Formular für GitHub-Issues (Fehler, Wunsch, Frage), **Mehr → Projekt auf GitHub** das Repository. Hinweis im Formular und in der Anleitung: alles ist öffentlich, keine Namen aus dem Team.
+
 ## v0.1.0-alpha – 15.10.2026
 
 Erste Testversion. Alle Funktionen aus dem Auftrag sind enthalten und automatisch getestet. Auf echten Handys und mit Google Kalender ist sie aber **noch nicht erprobt**; dafür ist diese Alpha gedacht.

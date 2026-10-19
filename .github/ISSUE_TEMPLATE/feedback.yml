@@ -1,0 +1,38 @@
+name: Feedback
+description: Frage, Fehler oder Wunsch zur Führungsvergabe
+title: "Feedback: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Danke für dein Feedback! **Alles hier ist öffentlich sichtbar.** Bitte keine Namen aus dem Team, keine Telefonnummern und keine Links aus der App hineinschreiben – die Links enthalten die Daten der Runde.
+  - type: dropdown
+    id: art
+    attributes:
+      label: Worum geht es?
+      options:
+        - Fehler
+        - Wunsch / Idee
+        - Frage
+    validations:
+      required: true
+  - type: dropdown
+    id: ansicht
+    attributes:
+      label: Ansicht
+      options:
+        - Koordination (Laptop)
+        - Person (Handy)
+        - Beides / weiß nicht
+  - type: textarea
+    id: beschreibung
+    attributes:
+      label: Was ist passiert bzw. was wünschst du dir?
+      description: Bei Fehlern bitte kurz die Schritte, was du erwartet hast und was stattdessen passiert ist.
+    validations:
+      required: true
+  - type: input
+    id: geraet
+    attributes:
+      label: Gerät und Browser
+      placeholder: z. B. iPhone, Safari / Windows-Laptop, Chrome

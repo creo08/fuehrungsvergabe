@@ -1,6 +1,6 @@
 // Koordinationsansicht (für den Laptop gestaltet): Runde anlegen, Führungen eintragen oder
 // importieren, Link 1 verschicken, Rückmeldungen sammeln, einteilen, korrigieren, verschicken.
-import { esc, toast, saveFile, pickFile, relTage, messageBox, baseUrl } from "./ui-common.js";
+import { esc, toast, saveFile, pickFile, relTage, messageBox, baseUrl, anleitungZeigen, REPO_URL, FEEDBACK_URL } from "./ui-common.js";
 import { actions as personActions } from "./ui-person.js";
 import {
   newRound, newRoundFrom, addTour, updateTour, nameKey, findTeamName, sortNames, sortTours, fmtDatum, fmtDatumKurz,
@@ -52,6 +52,9 @@ export function render(app) {
       <button class="link" data-action="k-demo">Demo-Runde anlegen</button>
       ${r ? `<button class="link gefahr" data-action="k-loeschen">Diese Runde löschen</button>` : ""}
       <button class="link" data-action="zu-person">Zur Personen-Ansicht</button>
+      <hr>
+      <a class="link" href="${FEEDBACK_URL}" target="_blank" rel="noopener" title="Öffentlich auf GitHub, Konto nötig – bitte keine Namen aus dem Team">Feedback geben ↗</a>
+      <a class="link" href="${REPO_URL}" target="_blank" rel="noopener">Projekt auf GitHub ↗</a>
     </div></details>
   </div>`;
   if (!r) {
@@ -372,6 +375,7 @@ export const actions = {
     if (r) neueRunde(app, newRoundFrom(r));
   },
   "k-demo": (app) => neueRunde(app, demoRound()),
+  "k-anleitung": () => anleitungZeigen(),
   "k-loeschen": (app) => {
     const r = cur(app);
     if (!r || !confirm(`${rundenName(r)} wirklich löschen? Das lässt sich nicht rückgängig machen (außer über eine Sicherung).`)) return;

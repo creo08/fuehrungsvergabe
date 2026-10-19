@@ -45,3 +45,8 @@ Oben stehen sechs Schritte. Einfach der Reihe nach durchgehen:
 - **Sicherung speichern** (oben rechts) regelmäßig klicken und die Datei aufheben. Damit kann man auch auf einen anderen Computer wechseln oder an eine:n neue:n Koordinator:in übergeben: dort **Sicherung öffnen**.
 - Die App immer **im selben Browser** benutzen (z. B. immer Chrome). Ein anderer Browser hat die Daten nicht.
 - Zum Ausprobieren: **Mehr → Demo-Runde anlegen**. Danach wieder löschen mit **Mehr → Diese Runde löschen**.
+- Diese Anleitung ist in der App jederzeit über **Anleitung** (oben rechts) erreichbar, auch offline.
+
+### Fragen, Fehler, Wünsche
+
+**Mehr → Feedback geben** öffnet ein Formular auf GitHub. Dafür braucht man ein kostenloses GitHub-Konto. Alles, was dort steht, ist **öffentlich sichtbar**: bitte keine Namen aus dem Team, keine Telefonnummern und keine Links aus der App (sie enthalten die Daten der Runde) hineinschreiben.
