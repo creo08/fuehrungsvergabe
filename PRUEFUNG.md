@@ -126,7 +126,7 @@ Skalierung (kompakt): Link 3 mit Beschreibung hat bei 10 Führungen 1.401 Zeiche
 
 | Weg | Grenze | Urteil |
 |---|---|---|
-| WhatsApp | Für die App für Privatnutzer ist keine Grenze offiziell dokumentiert. Die Business-API erlaubt 4.096 Zeichen pro Text. | 1–3 Tsd. Zeichen sind wahrscheinlich in Ordnung → **Gerätetest** |
+| WhatsApp | Für die App für Privatnutzer:innen ist keine Grenze offiziell dokumentiert. Die Business-API erlaubt 4.096 Zeichen pro Text. | 1–3 Tsd. Zeichen sind wahrscheinlich in Ordnung → **Gerätetest** |
 | Signal | Ab etwa 2.000 Zeichen wird der Text als „Langtext-Anhang“ verschickt (signal-cli-Konstante, Herstellerangabe fehlt). Ob der Link darin antippbar bleibt, ist unklar. | **Gerätetest** |
 | SMS | 153 Zeichen pro Segment. Ab einer vom Netz bzw. Gerät abhängigen Länge wird in MMS umgewandelt (200 bis 480 Zeichen berichtet). | **ungeeignet** für Link 1/3, Link 2 grenzwertig |
 | E-Mail | Outlook Desktop kürzte Links über Safe Links bis 2023 bei 2.084 Zeichen, seit Build 16130 bei 8.192. Reine Text-Mails können lange Zeilen umbrechen. | bis etwa 2.000 Zeichen sicher |
