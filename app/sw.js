@@ -19,6 +19,8 @@ const DATEIEN = [
   "./js/ui-common.js",
   "./js/ui-person.js",
   "./js/ui-koord.js",
+  "./js/markdown.js",
+  "./ANLEITUNG.md",
   "./vendor/lz-string.mjs",
   "./vendor/fflate.mjs",
   "./vendor/highs.mjs",

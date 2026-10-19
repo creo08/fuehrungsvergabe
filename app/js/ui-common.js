@@ -9,6 +9,41 @@ export const isIOS = () =>
 /** Basisadresse der App (ohne Fragment), funktioniert auch unter einem Unterpfad. */
 export const baseUrl = () => location.href.split("#")[0].split("?")[0];
 
+export const REPO_URL = "https://github.com/creo08/fuehrungsvergabe";
+export const FEEDBACK_URL = `${REPO_URL}/issues/new?template=feedback.yml`;
+const extern = (url, text) => `<a href="${url}" target="_blank" rel="noopener">${text}</a>`;
+
+/** Anleitung (ANLEITUNG.md, vom Service Worker offline vorgehalten) als Dialog zeigen. */
+export async function anleitungZeigen() {
+  let dlg = document.getElementById("anleitung");
+  if (!dlg) {
+    dlg = document.createElement("dialog");
+    dlg.id = "anleitung";
+    dlg.setAttribute("aria-label", "Anleitung");
+    dlg.innerHTML = `<div class="dlg-kopf"><span class="lbl">Anleitung</span><button class="btn small ghost" data-zu>Schließen</button></div>
+      <div class="dlg-inhalt anleitung-text"><p class="laden">Lädt …</p></div>
+      <p class="dlg-fuss klein">Fragen, Fehler oder Wünsche? ${extern(FEEDBACK_URL, "Feedback auf GitHub geben")} (öffentlich, GitHub-Konto nötig – bitte keine Namen aus dem Team) · ${extern(REPO_URL, "Projekt auf GitHub")}</p>`;
+    dlg.querySelector("[data-zu]").addEventListener("click", () => dlg.close());
+    // Klick auf den abgedunkelten Hintergrund schließt ebenfalls
+    dlg.addEventListener("click", (ev) => ev.target === dlg && dlg.close());
+    document.body.append(dlg);
+  }
+  const inhalt = dlg.querySelector(".dlg-inhalt");
+  if (!dlg.dataset.geladen) {
+    try {
+      const res = await fetch("ANLEITUNG.md");
+      if (!res.ok) throw new Error(res.statusText);
+      const { markdownToHtml } = await import("./markdown.js");
+      inhalt.innerHTML = markdownToHtml(await res.text(), { ebene: 2 });
+      dlg.dataset.geladen = "1";
+    } catch {
+      inhalt.innerHTML = `<p>Die Anleitung konnte nicht geladen werden. Online steht sie hier: ${extern(`${REPO_URL}/blob/main/app/ANLEITUNG.md`, "Anleitung auf GitHub")}</p>`;
+    }
+  }
+  if (!dlg.open) dlg.showModal();
+  inhalt.scrollTop = 0;
+}
+
 let toastTimer = null;
 export function toast(text, art = "ok") {
   const el = document.getElementById("toast");

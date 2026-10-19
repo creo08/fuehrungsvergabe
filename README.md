@@ -8,7 +8,8 @@ Eine kleine App, mit der ein Team Führungen fair verteilt: Wer kann wann, wie v
 
 **App öffnen: <https://creo08.github.io/fuehrungsvergabe/>**
 
-- Kurzanleitung für die Bedienung (ohne Technik): [`ANLEITUNG.md`](ANLEITUNG.md)
+- Kurzanleitung für die Bedienung (ohne Technik): [`app/ANLEITUNG.md`](app/ANLEITUNG.md), in der App über **Anleitung** oben rechts
+- Fragen, Fehler, Wünsche: [Feedback geben](https://github.com/creo08/fuehrungsvergabe/issues/new?template=feedback.yml) (öffentlich, bitte keine Namen aus dem Team)
 - Version und Änderungen: [`CHANGELOG.md`](CHANGELOG.md)
 - Fachliche Prüfung, Messungen und alle Entscheidungen: [`PRUEFUNG.md`](PRUEFUNG.md)
 
@@ -140,12 +141,14 @@ Es gibt keinen Build-Schritt: reine ES-Module, alle Bibliotheken liegen in `app/
 ```
 app/                 die veröffentlichte App
   index.html, sw.js, manifest.webmanifest, css/, icons/
+  ANLEITUNG.md       Kurzanleitung, in der App als Dialog (offline vorgehalten)
   js/model.js        Datenmodell, Zeiten (Wiener Wanduhrzeit als Text), Revisionen
   js/codec.js        Links: R (Runde), A (Antwort), P (Plan) + lz-string
   js/excel.js        .xlsx-Leser (fflate) und Einfüge-Parser, Zeilenprüfung
   js/solver.js       ILP-Modell + HiGHS, Auswertung/Hinweise
   js/ical.js         .ics nach RFC 5545 mit VTIMEZONE Europe/Vienna
   js/store.js        IndexedDB/localStorage, Sicherung
+  js/markdown.js     kleiner Markdown-Renderer für die Anleitung
   js/ui-*.js         Oberfläche Koordinator:in/Person
   vendor/            highs (WebAssembly), fflate, lz-string
   vorlage-fuehrungen.xlsx

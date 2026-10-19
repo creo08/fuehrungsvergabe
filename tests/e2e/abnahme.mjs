@@ -114,6 +114,17 @@ try {
   assert.equal(await k.locator("table.tabelle tbody tr").count(), 5);
   schritt("Runde mit Zeitraum, Frist und 5 Personen angelegt");
 
+  // Anleitung und Feedback-Link
+  await k.getByRole("button", { name: "Anleitung" }).click();
+  await k.locator("dialog#anleitung").getByRole("heading", { name: "Für den:die Koordinator:in (am Laptop)" }).waitFor();
+  assert.equal(await k.locator("dialog#anleitung table tr").count(), 7);
+  await k.locator("dialog#anleitung").getByRole("button", { name: "Schließen" }).click();
+  assert.equal(await k.locator("dialog#anleitung").isVisible(), false);
+  await k.locator(".mehr summary").click();
+  assert.equal(await k.getByRole("link", { name: "Feedback geben ↗" }).getAttribute("href"), "https://github.com/creo08/fuehrungsvergabe/issues/new?template=feedback.yml");
+  await k.locator(".mehr summary").click();
+  schritt("Anleitung als Dialog geöffnet und geschlossen, Feedback-Link zeigt auf GitHub-Issues");
+
   // Excel: Einfügen
   await k.locator('.tabs button:has-text("2. Führungen")').click();
   await k.getByRole("button", { name: "Aus Excel einfügen" }).click();
@@ -286,13 +297,21 @@ try {
   await k.locator('.tabs button:has-text("5. Einteilung")').click();
   await k.getByRole("button", { name: "Neu einteilen" }).click();
   await k.waitForSelector("text=Einteilung fertig.", { timeout: 30000 });
+  await k.reload();
+  await k.waitForSelector(".tabs");
+  await k.getByRole("button", { name: "Anleitung" }).click();
+  await k.locator("dialog#anleitung").getByRole("heading", { name: "Wichtig" }).waitFor();
+  await k.keyboard.press("Escape");
   await kctx.setOffline(false);
   await ap.evaluate(() => navigator.serviceWorker.ready);
   await actx.setOffline(true);
   await ap.goto(link1);
   await ap.waitForSelector("#pname");
+  await ap.getByRole("button", { name: "Anleitung" }).click();
+  await ap.locator("dialog#anleitung").getByRole("heading", { name: "Wenn eine neue Runde kommt" }).waitFor();
+  await ap.locator("dialog#anleitung").getByRole("button", { name: "Schließen" }).click();
   await actx.setOffline(false);
-  schritt("Offline: Koordinator:in lädt neu und teilt neu ein, Person öffnet Link 1 – alles ohne Netz");
+  schritt("Offline: Koordinator:in lädt neu, teilt neu ein und öffnet die Anleitung, Person öffnet Link 1 und die Anleitung – alles ohne Netz");
 
   // ===== Sicherung: Gerät A → Gerät B =====
   const [bdl] = await Promise.all([k.waitForEvent("download"), k.getByRole("button", { name: "Sicherung speichern" }).click()]);
