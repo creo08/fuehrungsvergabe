@@ -307,8 +307,11 @@ try {
   await actx.setOffline(true);
   await ap.goto(link1);
   await ap.waitForSelector("#pname");
+  await ap.getByRole("button", { name: "Anleitung" }).click();
+  await ap.locator("dialog#anleitung").getByRole("heading", { name: "Wenn eine neue Runde kommt" }).waitFor();
+  await ap.locator("dialog#anleitung").getByRole("button", { name: "Schließen" }).click();
   await actx.setOffline(false);
-  schritt("Offline: Koordinator:in lädt neu, teilt neu ein und öffnet die Anleitung, Person öffnet Link 1 – alles ohne Netz");
+  schritt("Offline: Koordinator:in lädt neu, teilt neu ein und öffnet die Anleitung, Person öffnet Link 1 und die Anleitung – alles ohne Netz");
 
   // ===== Sicherung: Gerät A → Gerät B =====
   const [bdl] = await Promise.all([k.waitForEvent("download"), k.getByRole("button", { name: "Sicherung speichern" }).click()]);

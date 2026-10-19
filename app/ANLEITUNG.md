@@ -6,6 +6,8 @@ Die App funktioniert auch ohne Internet, sobald du sie einmal geöffnet hast. Du
 
 ## Für alle im Team (am Handy)
 
+Diese Anleitung findest du in der App jederzeit oben rechts unter **Anleitung**.
+
 ### Wenn eine neue Runde kommt
 
 1. **Nachricht von dem:der Koordinator:in in WhatsApp antippen** (den langen Link).

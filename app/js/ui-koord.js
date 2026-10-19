@@ -375,7 +375,8 @@ export const actions = {
     if (r) neueRunde(app, newRoundFrom(r));
   },
   "k-demo": (app) => neueRunde(app, demoRound()),
-  "k-anleitung": () => anleitungZeigen(),
+  // Kopfzeile, auch in der Personen-Ansicht (main.js fällt auf diese Aktionen zurück)
+  anleitung: () => anleitungZeigen(),
   "k-loeschen": (app) => {
     const r = cur(app);
     if (!r || !confirm(`${rundenName(r)} wirklich löschen? Das lässt sich nicht rückgängig machen (außer über eine Sicherung).`)) return;

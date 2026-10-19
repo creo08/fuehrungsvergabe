@@ -47,7 +47,6 @@ header.top {
 }
 body[data-seite^="person"] header.top { max-width: 640px; }
 .top .hilfe { margin-left: auto; }
-body:not([data-seite="koord"]) .top .hilfe { display: none; }
 .hilfe + .update { margin-left: 0; }
 .update { margin-left: auto; font-size: .9rem; display: flex; gap: 8px; align-items: center; }
 main { margin: 0 auto; }
@@ -123,16 +122,16 @@ dialog#anleitung::backdrop { background: rgba(10, 14, 24, .45); }
 .dlg-kopf .lbl { font-weight: 700; }
 .dlg-inhalt { overflow-y: auto; padding: 16px; }
 .dlg-fuss { padding: 10px 16px; border-top: 1px solid var(--line); }
-.anleitung { display: flex; flex-direction: column; gap: 10px; }
-.anleitung h3 { font-size: 1.05rem; margin-top: 8px; }
-.anleitung h4 { font-size: .95rem; margin: 4px 0 0; }
-.anleitung ol, .anleitung ul { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 4px; }
-.anleitung li > ul { margin-top: 4px; }
-.anleitung hr { width: 100%; border: 0; border-top: 1px solid var(--line); margin: 4px 0; }
-.anleitung table { border-collapse: collapse; font-size: .92rem; }
-.anleitung th { text-align: left; font-size: .75rem; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); padding: 6px 8px; border-bottom: 2px solid var(--line); }
-.anleitung td { padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
-.anleitung code { font-family: var(--f-mono); font-size: .88em; }
+.anleitung-text { display: flex; flex-direction: column; gap: 10px; }
+.anleitung-text h3 { font-size: 1.05rem; margin-top: 8px; }
+.anleitung-text h4 { font-size: .95rem; margin: 4px 0 0; }
+.anleitung-text ol, .anleitung-text ul { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 4px; }
+.anleitung-text li > ul { margin-top: 4px; }
+.anleitung-text hr { width: 100%; border: 0; border-top: 1px solid var(--line); margin: 4px 0; }
+.anleitung-text table { border-collapse: collapse; font-size: .92rem; }
+.anleitung-text th { text-align: left; font-size: .75rem; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); padding: 6px 8px; border-bottom: 2px solid var(--line); }
+.anleitung-text td { padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.anleitung-text code { font-family: var(--f-mono); font-size: .88em; }
 
 #toast {
   position: fixed; left: 50%; transform: translateX(-50%); bottom: max(16px, env(safe-area-inset-bottom)); z-index: 20;

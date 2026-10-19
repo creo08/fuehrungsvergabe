@@ -21,7 +21,7 @@ export async function anleitungZeigen() {
     dlg.id = "anleitung";
     dlg.setAttribute("aria-label", "Anleitung");
     dlg.innerHTML = `<div class="dlg-kopf"><span class="lbl">Anleitung</span><button class="btn small ghost" data-zu>Schließen</button></div>
-      <div class="dlg-inhalt anleitung"><p class="laden">Lädt …</p></div>
+      <div class="dlg-inhalt anleitung-text"><p class="laden">Lädt …</p></div>
       <p class="dlg-fuss klein">Fragen, Fehler oder Wünsche? ${extern(FEEDBACK_URL, "Feedback auf GitHub geben")} (öffentlich, GitHub-Konto nötig – bitte keine Namen aus dem Team) · ${extern(REPO_URL, "Projekt auf GitHub")}</p>`;
     dlg.querySelector("[data-zu]").addEventListener("click", () => dlg.close());
     // Klick auf den abgedunkelten Hintergrund schließt ebenfalls

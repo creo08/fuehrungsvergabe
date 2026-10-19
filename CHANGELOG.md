@@ -4,7 +4,7 @@ Versionen nach [Semantic Versioning](https://semver.org/lang/de/). Solange die H
 
 ## Unveröffentlicht
 
-- **Anleitung in der App:** In der Koordinationsansicht öffnet **Anleitung** (oben rechts, immer sichtbar) die Kurzanleitung als Dialog, auch offline. Die Anleitung liegt dafür jetzt unter `app/ANLEITUNG.md`.
+- **Anleitung in der App:** **Anleitung** (oben rechts, immer sichtbar, in der Koordinations- und der Personen-Ansicht) öffnet die Kurzanleitung als Dialog, auch offline. Die Anleitung liegt dafür jetzt unter `app/ANLEITUNG.md`.
 - **Feedback:** **Mehr → Feedback geben** öffnet ein Formular für GitHub-Issues (Fehler, Wunsch, Frage), **Mehr → Projekt auf GitHub** das Repository. Hinweis im Formular und in der Anleitung: alles ist öffentlich, keine Namen aus dem Team.
 
 ## v0.1.0-alpha – 15.10.2026
