@@ -1,0 +1,61 @@
+# Testet die App und veröffentlicht den Ordner app/ auf GitHub Pages.
+# Einmalig nötig: Repository → Settings → Pages → Source: „GitHub Actions“.
+name: Tests und Veröffentlichung
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Unit-Tests (Excel/Einfügen, Solver, Links, iCal, Sicherung)
+        run: npm test
+      - name: Playwright installieren
+        run: |
+          npm install --no-audit --no-fund
+          npx playwright install --with-deps chromium
+      - name: Abnahmetest im Browser (kompletter Ablauf, offline, Sicherung)
+        run: npm run test:e2e
+      - name: Screenshots und Dateien aus dem Abnahmetest
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: abnahme
+          path: test-results/
+
+  veroeffentlichen:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: tests
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read # zum Auschecken (Rechte auf Job-Ebene ersetzen die Vorgabe oben)
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Version in den Service Worker schreiben (damit Geräte Updates erkennen)
+        run: sed -i "s/__VERSION__/${GITHUB_SHA::12}/" app/sw.js
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: app
+      - id: deploy
+        uses: actions/deploy-pages@v4

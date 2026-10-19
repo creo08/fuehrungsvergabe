@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Führungsvergabe</title>
+  <meta name="description" content="Führungen im Team einteilen – offline, ohne Server.">
+  <meta name="theme-color" content="#2846a8" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#11141b" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <meta name="referrer" content="no-referrer">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Führungen">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <header class="top">
+    <h1>Führungsvergabe</h1>
+    <div id="update" class="update" hidden>Neue Version verfügbar. <button class="btn small">Neu laden</button></div>
+  </header>
+  <main id="app" aria-live="polite"><p class="laden">Lädt …</p></main>
+  <div id="toast" role="status" hidden></div>
+  <noscript><p class="karte">Diese App braucht JavaScript.</p></noscript>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
