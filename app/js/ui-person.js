@@ -26,12 +26,12 @@ function renderHome(app) {
       <textarea id="einfuegen" rows="4" placeholder="Nachricht oder Link hier einfügen"></textarea>
       <div class="knoepfe">
         <button class="btn" data-action="person-einfuegen">Öffnen</button>
-        ${navigator.clipboard?.readText ? `<button class="btn ghost" data-action="person-zwischenablage">Aus Zwischenablage einfügen</button>` : ""}
+        ${navigator.clipboard?.readText ? `<button class="btn ghost" data-action="person-zwischenablage">Einfügen</button>` : ""}
       </div>
     </section>
     ${plaene.length ? `<section class="karte"><h2>Pläne</h2><div class="liste">${plaene.map((x) => `<button class="zeile-knopf" data-action="person-oeffnen" data-seite="person-plan" data-rid="${esc(x.round.id)}">Plan ${esc(zr(x.round))}</button>`).join("")}</div></section>` : ""}
-    ${runden.length ? `<section class="karte"><h2>Rückmeldungen</h2><div class="liste">${runden.map((r) => `<button class="zeile-knopf" data-action="person-oeffnen" data-seite="person-runde" data-rid="${esc(r.id)}">Verfügbarkeit ${esc(zr(r))}${r.frist ? ` · bis ${esc(fmtDatum(r.frist))}` : ""}</button>`).join("")}</div></section>` : ""}
-    <p class="fuss"><button class="link" data-action="zu-koordinator">Ich bin Koordinator:in →</button></p>
+    ${runden.length ? `<section class="karte"><h2>Rückmeldungen</h2><div class="liste">${runden.map((r) => `<button class="zeile-knopf" data-action="person-oeffnen" data-seite="person-runde" data-rid="${esc(r.id)}">Verfügbarkeit ${esc(zr(r))}${r.frist ? `, bis ${esc(fmtDatum(r.frist))}` : ""}</button>`).join("")}</div></section>` : ""}
+    <p class="fuss"><button class="link" data-action="zu-koordinator">Ich bin Koordinator:in</button></p>
   </div>`;
 }
 
@@ -93,7 +93,7 @@ function renderRunde(app) {
       const grund = s.mineFix ? '<span class="tag fix">fix eingeteilt</span>' : s.voll ? '<span class="tag">schon besetzt</span>' : !s.langOk ? '<span class="tag aus">Sprache passt nicht</span>' : "";
       return `<label class="fuehrung ${s.aktiv ? "" : "aus"} ${s.kann || s.mineFix ? "an" : ""}">
         <span class="zeit"><b>${esc(t.beginn)}</b>–${esc(t.ende)}</span>
-        <span class="info"><b>${esc(t.ort)}</b>${t.kurztitel ? ` · ${esc(t.kurztitel)}` : ""}
+        <span class="info"><b>${esc(t.ort)}</b>${t.kurztitel ? `, ${esc(t.kurztitel)}` : ""}
           <span class="tags"><span class="tag ${t.sprache === "EN" ? "en" : ""}">${t.sprache}</span>${grund}${s.geaendert ? '<span class="tag warn">neu/geändert</span>' : ""}</span>
           ${t.beschreibung ? `<details class="langtext"><summary>Beschreibung</summary><p>${esc(t.beschreibung).replace(/\n/g, "<br>")}</p></details>` : ""}
         </span>
@@ -114,7 +114,7 @@ function renderRunde(app) {
   return `<div class="person">
     <section class="karte">
       <h2>Verfügbarkeit melden</h2>
-      <p class="sub">${zr ? `Zeitraum ${esc(zr)}` : ""}${r.frist ? ` · Rückmeldung bis <b>${esc(fmtDatum(r.frist))}</b>` : ""}</p>
+      <p class="sub">${[zr ? `Zeitraum ${esc(zr)}` : "", r.frist ? `Rückmeldung bis <b>${esc(fmtDatum(r.frist))}</b>` : ""].filter(Boolean).join(", ")}</p>
       <div class="feld"><label for="pname">Ich bin</label>
         <select id="pname" data-change="person-name"><option value="">– Name wählen –</option>${r.team.map((n) => `<option ${n === name ? "selected" : ""}>${esc(n)}</option>`).join("")}</select></div>
       <div class="feld"><span class="lbl">Ich führe auf</span>
@@ -137,7 +137,7 @@ function renderRunde(app) {
       <button class="btn gross" data-action="person-antwort" ${fehler.length ? "disabled" : ""}>Antwort erstellen</button>
       ${antwort ? messageBox("Antwort an den:die Koordinator:in", antwort, { id: "antwort", hinweis: "Diese Nachricht per WhatsApp an den:die Koordinator:in schicken. Änderst du danach etwas, erstelle die Antwort neu und schicke sie noch einmal – die neueste gilt." }) : ""}
     </section>
-    <p class="fuss"><button class="link" data-action="person-home">← Übersicht</button></p>
+    <p class="fuss"><button class="link" data-action="person-home">Zur Übersicht</button></p>
   </div>`;
 }
 
@@ -158,7 +158,7 @@ function renderPlan(app) {
       <div class="feld"><label for="pname2">Ich bin</label>
         <select id="pname2" data-change="person-name"><option value="">– Name wählen –</option>${r.team.map((n) => `<option ${n === name ? "selected" : ""}>${esc(n)}</option>`).join("")}</select></div>
       ${name ? `<p><b>${esc(name)}</b>, du hast ${meine.length} ${meine.length === 1 ? "Führung" : "Führungen"}.</p>
-        ${meine.length ? `<ul class="meine">${meine.map((t) => `<li><b>${esc(fmtDatumKurz(t.datum))}</b> ${esc(t.beginn)}–${esc(t.ende)} ${esc(t.ort)}${t.kurztitel ? ` · ${esc(t.kurztitel)}` : ""}</li>`).join("")}</ul>
+        ${meine.length ? `<ul class="meine">${meine.map((t) => `<li><b>${esc(fmtDatumKurz(t.datum))}</b> ${esc(t.beginn)}–${esc(t.ende)} ${esc(t.ort)}${t.kurztitel ? `, ${esc(t.kurztitel)}` : ""}</li>`).join("")}</ul>
         <button class="btn gross" data-action="person-ics">Meine Termine in den Kalender</button>
         <p class="klein">Termine beginnen 1 Stunde vor der Führung und enden 1 Stunde danach. Spätere Änderungen gibt es nur im Google Kalender, nicht hier.</p>` : ""}` : ""}
     </section>
@@ -166,11 +166,11 @@ function renderPlan(app) {
       <h2>Alle Führungen</h2>
       <div class="touren">${tours.map((t) => `<div class="fuehrung plan ${mein(t) ? "mein" : ""}">
         <span class="zeit"><b>${esc(fmtDatumKurz(t.datum))}</b>${esc(t.beginn)}–${esc(t.ende)}</span>
-        <span class="info"><b>${esc(t.ort)}</b>${t.kurztitel ? ` · ${esc(t.kurztitel)}` : ""} <span class="tag ${t.sprache === "EN" ? "en" : ""}">${t.sprache}</span><br>
+        <span class="info"><b>${esc(t.ort)}</b>${t.kurztitel ? `, ${esc(t.kurztitel)}` : ""} <span class="tag ${t.sprache === "EN" ? "en" : ""}">${t.sprache}</span><br>
           ${titleNames(a[t.id] ?? []).map((n) => (n === "??" ? '<span class="tag warn">??</span>' : name && nameKey(n) === nameKey(name) ? `<span class="ich">${esc(n)}</span>` : esc(n))).join(", ")}</span>
       </div>`).join("")}</div>
     </section>
-    <p class="fuss"><button class="link" data-action="person-home">← Übersicht</button></p>
+    <p class="fuss"><button class="link" data-action="person-home">Zur Übersicht</button></p>
   </div>`;
 }
 

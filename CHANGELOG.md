@@ -6,6 +6,7 @@ Versionen nach [Semantic Versioning](https://semver.org/lang/de/). Solange die H
 
 - **Anleitung in der App:** **Anleitung** (oben rechts, immer sichtbar, in der Koordinations- und der Personen-Ansicht) öffnet die Kurzanleitung als Dialog, auch offline. Die Anleitung liegt dafür jetzt unter `app/ANLEITUNG.md`.
 - **Feedback:** **Mehr → Feedback geben** öffnet ein Formular für GitHub-Issues (Fehler, Wunsch, Frage), **Mehr → Projekt auf GitHub** das Repository. Hinweis im Formular und in der Anleitung: alles ist öffentlich, keine Namen aus dem Team.
+- **Darstellung überarbeitet (ohne Änderung am Ablauf):** Fehler- und Warnmeldungen sind im Dunkelmodus wieder gut lesbar, Eingabefelder haben einen deutlich sichtbaren Rand, deaktivierte Knöpfe sind klar als solche erkennbar. Nebenaktionen sind neutral, Blau bleibt der Hauptaktion und der Auswahl vorbehalten. Beschriftungen und Tabellenköpfe in normaler Schreibung statt Großbuchstaben, Knöpfe reagieren auf Zeigen und Drücken. Texte ohne Mittelpunkte und Pfeile, z. B. „Anna (3/3)“ statt „Anna · 3/3“, „Einfügen“ statt „Aus Zwischenablage einfügen“. Bildschirmfotos im README erneuert.
 
 ## v0.1.0-alpha – 15.10.2026
 
