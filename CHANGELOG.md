@@ -2,7 +2,7 @@
 
 Versionen nach [Semantic Versioning](https://semver.org/lang/de/). Solange die Hauptversion 0 ist, kann sich noch alles ändern, auch das Format der Links und der Sicherungsdateien.
 
-## Unveröffentlicht
+## v0.1.1-alpha – 02.11.2026
 
 - **Anleitung in der App:** **Anleitung** (oben rechts, immer sichtbar, in der Koordinations- und der Personen-Ansicht) öffnet die Kurzanleitung als Dialog, auch offline. Die Anleitung liegt dafür jetzt unter `app/ANLEITUNG.md`.
 - **Feedback:** **Mehr → Feedback geben** öffnet ein Formular für GitHub-Issues (Fehler, Wunsch, Frage), **Mehr → Projekt auf GitHub** das Repository. Hinweis im Formular und in der Anleitung: alles ist öffentlich, keine Namen aus dem Team.
