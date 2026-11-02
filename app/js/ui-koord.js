@@ -23,7 +23,7 @@ const TABS = [
 ];
 
 const cur = (app) => app.state.rounds[app.view.rid ?? app.state.currentRoundId] ?? null;
-const rundenName = (r) => `${r.demo ? "DEMO · " : ""}${r.von && r.bis ? `Runde ${fmtDatum(r.von)} – ${fmtDatum(r.bis)}` : "Neue Runde (Zeitraum fehlt)"}`;
+const rundenName = (r) => `${r.von && r.bis ? `Runde ${fmtDatum(r.von)} – ${fmtDatum(r.bis)}` : "Neue Runde (Zeitraum fehlt)"}${r.demo ? " (Demo)" : ""}`;
 const sprachTag = (l) => `<span class="tag ${l === "EN" ? "en" : ""}">${l}</span>`;
 
 let persistGefragt = false;
@@ -197,7 +197,7 @@ function tabLink1(app, r) {
     <p class="sub">Die Nachricht enthält alle Führungen (ohne Min/Max anderer). Jede Person tippt den Link an oder kopiert die ganze Nachricht in die App.</p>
     ${warn.length ? `<ul class="hinweise">${warn.map((w) => `<li>${esc(w)}</li>`).join("")}</ul>` : ""}
     <label class="schalter"><input type="checkbox" data-change="k-langtext" data-k="r" ${r.langtext.r ? "checked" : ""}> Langtext (Beschreibung) mitschicken</label>
-    ${messageBox("Link 1 – an alle (WhatsApp-Gruppe)", messageRound(r, url), { id: "link1", hinweis: `Stand ${r.rev}${r.sentRev ? ` · zuletzt verschickt: Stand ${r.sentRev}` : " · noch nicht verschickt"}. Lange Links (über ca. 3.000 Zeichen) sind in WhatsApp evtl. nicht antippbar – Kopieren und Einfügen funktioniert immer.` })}
+    ${messageBox("Link 1 – an alle (WhatsApp-Gruppe)", messageRound(r, url), { id: "link1", hinweis: `Stand ${r.rev}${r.sentRev ? `, zuletzt verschickt: Stand ${r.sentRev}` : ", noch nicht verschickt"}. Lange Links (über ca. 3.000 Zeichen) sind in WhatsApp evtl. nicht antippbar – Kopieren und Einfügen funktioniert immer.` })}
     <p><a href="${esc(url)}" target="_blank" rel="noopener">Vorschau: so sieht es eine Person</a></p>
   </section>`;
 }
@@ -242,7 +242,7 @@ function tabEinteilung(app, r) {
       <div class="knoepfe"><button class="btn" data-action="k-einteilen" ${laeuft || !r.tours.length ? "disabled" : ""}>${laeuft ? "Einteilung läuft …" : r.plan ? "Neu einteilen" : "Einteilen"}</button>
       ${r.plan ? `<button class="btn ghost" data-action="k-plan-leeren">Plan leeren</button>` : `<button class="btn ghost" data-action="k-plan-haendisch">Händisch einteilen</button>`}</div></div>
     <p class="sub">Rangfolge: möglichst kein Platz offen › Min erreichen › keine direkt aufeinanderfolgenden Führungen (&lt; 30 min) › gleichmäßig nach Führungsstunden relativ zum Max. Max wird nie überschritten, Fix ist immer gesetzt.</p>
-    ${r.plan?.solvedAt ? `<p class="klein">Berechnet ${esc(new Date(r.plan.solvedAt).toLocaleString("de-AT", { dateStyle: "short", timeStyle: "short" }))}${r.plan.ms != null ? ` in ${(r.plan.ms / 1000).toLocaleString("de-AT", { maximumFractionDigits: 1 })} s` : ""}${r.plan.manual ? " · händisch korrigiert" : ""}</p>` : ""}
+    ${r.plan?.solvedAt ? `<p class="klein">Berechnet ${esc(new Date(r.plan.solvedAt).toLocaleString("de-AT", { dateStyle: "short", timeStyle: "short" }))}${r.plan.ms != null ? ` in ${(r.plan.ms / 1000).toLocaleString("de-AT", { maximumFractionDigits: 1 })} s` : ""}${r.plan.manual ? ", händisch korrigiert" : ""}</p>` : ""}
   </section>`;
   if (!r.plan) return kopf;
   const a = r.plan.a;
@@ -279,7 +279,7 @@ function tabEinteilung(app, r) {
       const passend = frei.filter((m) => !grund(m));
       const rest = frei.filter((m) => grund(m));
       const anzahl = (m) => Object.values(a).filter((s) => s.some((x) => x && nameKey(x) === nameKey(m))).length;
-      const opt = (m, warn) => `<option value="${esc(m)}" ${n && nameKey(n) === nameKey(m) ? "selected" : ""}>${esc(m)}${warn ? ` (${esc(grund(m))})` : ""} · ${anzahl(m)}${ans[m] ? `/${ans[m].max}` : ""}</option>`;
+      const opt = (m, warn) => `<option value="${esc(m)}" ${n && nameKey(n) === nameKey(m) ? "selected" : ""}>${esc(m)} (${warn ? `${esc(grund(m))}, ` : ""}${anzahl(m)}${ans[m] ? `/${ans[m].max}` : ""})</option>`;
       return `<select class="slot ${n ? (grund(n) ? "warn" : "") : "leer"}" data-change="k-slot" data-id="${esc(t.id)}" data-k="${k}" aria-label="Platz ${k + 1}">
         <option value="">— offen —</option>
         ${passend.length ? `<optgroup label="Passend">${passend.map((m) => opt(m, false)).join("")}</optgroup>` : ""}
